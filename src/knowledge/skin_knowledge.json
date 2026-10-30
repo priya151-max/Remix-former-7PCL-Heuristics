@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "name": "Skin lesion educational knowledge base",
+    "version": "1.0",
+    "note": "Plain-language educational text written for this project from general dermatology teaching material (7-point checklist, ABCDE rule, common dermoscopic features). It supports explanations only; it never changes the model's numbers. Have a qualified dermatologist review and extend it before public deployment."
+  },
+  "references": [
+    {"id": "R1", "text": "Argenziano G, Fabbrocciaro G, Carli P, De Giorgi V, Sammarco E, Delfino M. Epiluminescence microscopy for the diagnosis of doubtful melanocytic skin lesions: comparison of the ABCD rule of dermatoscopy and a new 7-point checklist based on pattern analysis. Arch Dermatol. 1998;134(12):1563-1570."},
+    {"id": "R2", "text": "Kawahara J, Daneshvar S, Argenziano G, Hamarneh G. Seven-point checklist and skin lesion classification using multitask multimodal neural nets. IEEE J Biomed Health Inform. 2019;23(2):538-546. (Derm7pt dataset)"},
+    {"id": "R3", "text": "Friedman RJ, Rigel DS, Kopf AW. Early detection of malignant melanoma: the role of physician examination and self-examination of the skin. CA Cancer J Clin. 1985;35(3):130-151. (ABCD rule; the E for Evolving was added later)"},
+    {"id": "R4", "text": "Kittler H, Pehamberger H, Wolff K, Binder M. Diagnostic accuracy of dermoscopy. Lancet Oncol. 2002;3(3):159-165."},
+    {"id": "R5", "text": "RemixFormer++: a multi-modal transformer model for precision skin tumor differential diagnosis with memory-efficient attention. IEEE Transactions on Medical Imaging."}
+  ],
+  "chunks": [
+    {
+      "id": "class_bcc_overview", "type": "class", "tags": ["class:BCC"],
+      "title": "Basal cell carcinoma: what it is",
+      "text": "Basal cell carcinoma (BCC) is the most common type of skin cancer. It starts in the basal cells, which sit in the lowest layer of the outer skin. It usually grows slowly and rarely spreads to other parts of the body, but if it is left untreated it can damage the skin and the tissue around it. It is most often found on skin that has had a lot of sun, such as the face, ears, neck and scalp."
+    },
+    {
+      "id": "class_bcc_features", "type": "class", "tags": ["class:BCC", "attr:VS", "feature"],
+      "title": "Basal cell carcinoma: how it looks",
+      "text": "A BCC often looks like a pearly or shiny bump, a flat pink or flesh-coloured patch, or a small sore that bleeds, crusts and does not heal. Under a dermatoscope doctors look for tree-like branching blood vessels (arborizing vessels), blue-grey nests or dots, and small ulcers. Many BCCs have no pigment network. Some BCCs contain pigment and can be mistaken for a mole or a melanoma. A suspected BCC is usually confirmed with a small skin sample (biopsy), and a specialist decides on the treatment."
+    },
+    {
+      "id": "class_nev_overview", "type": "class", "tags": ["class:Nev"],
+      "title": "Melanocytic nevus (mole): what it is",
+      "text": "A melanocytic nevus, or mole, is a harmless collection of pigment-producing cells (melanocytes). Most people have several and the great majority never cause problems. In the dataset behind this system the group covers common moles, atypical (dysplastic, or Clark) moles, Spitz or Reed moles, blue moles, congenital moles, dermal moles, combined moles and recurrent moles."
+    },
+    {
+      "id": "class_nev_features", "type": "class", "tags": ["class:Nev", "attr:PN", "attr:DaG", "feature"],
+      "title": "Melanocytic nevus (mole): how it looks",
+      "text": "Harmless moles tend to be symmetric and evenly coloured, often one or two shades of brown, with a smooth, regular border. Under a dermatoscope they usually show a regular pigment network and evenly spread dots or globules, and no blue-whitish veil. Some moles (atypical or dysplastic moles) look irregular and can be hard to tell apart from an early melanoma, which is why doctors follow moles over time. A mole that grows, changes colour or shape, itches or bleeds should be checked."
+    },
+    {
+      "id": "class_mel_overview", "type": "class", "tags": ["class:Mel"],
+      "title": "Melanoma: what it is",
+      "text": "Melanoma is a cancer of the pigment-producing cells (melanocytes). It is less common than other skin cancers but more serious, because it can spread to other organs. When it is found early, while it is still thin, it can usually be cured with a small operation, which is why early detection matters so much. It can start in an existing mole or on normal-looking skin. In this dataset the melanoma group includes melanoma in situ (only in the top skin layer), invasive melanomas of different thicknesses, and melanoma metastases."
+    },
+    {
+      "id": "class_mel_features", "type": "class", "tags": ["class:Mel", "attr:PN", "attr:BWV", "attr:STR", "attr:DaG", "attr:RS", "feature"],
+      "title": "Melanoma: warning signs",
+      "text": "Doctors use the ABCDE rule: Asymmetry, an irregular Border, uneven Colour, a Diameter larger than about 6 millimetres, and Evolving, meaning any change over time. Under a dermatoscope, suspicious features include an irregular pigment network, a blue-whitish veil, irregular streaks, irregular dots and globules, irregular blotches, regression structures and irregular vessels. These signs raise suspicion but do not prove melanoma: only an examination by a specialist and, when needed, a biopsy can confirm it."
+    },
+    {
+      "id": "class_sk_overview", "type": "class", "tags": ["class:SK"],
+      "title": "Seborrheic keratosis: what it is",
+      "text": "Seborrheic keratosis (SK) is a very common, non-cancerous skin growth, especially in older adults. It often looks like a waxy, slightly raised, 'stuck-on' spot that can be tan, brown or black, and it can appear on the face, chest, back and elsewhere. SKs are harmless and usually need no treatment unless they are irritated or bother the person."
+    },
+    {
+      "id": "class_sk_features", "type": "class", "tags": ["class:SK", "attr:VS", "feature"],
+      "title": "Seborrheic keratosis: how it looks",
+      "text": "Dermatoscopic clues include small white or yellow round dots (milia-like cysts), dark plugged pores (comedo-like openings), a brain-like pattern of ridges and grooves, and a sharply defined edge. Hairpin-shaped blood vessels can also be seen. Some dark SKs can look like melanoma, so a doctor may want to examine, or sample, a spot that looks unusual, is changing, or is inflamed."
+    },
+    {
+      "id": "class_misc_overview", "type": "class", "tags": ["class:Misc"],
+      "title": "Other lesion types: what this group means",
+      "text": "The 'other' group brings together several less common lesion types that are not basal cell carcinoma, melanoma, seborrheic keratosis or a melanocytic mole. In the dataset behind this system it includes lentigo (a flat, sun-related brown spot), melanosis, vascular lesions such as angiomas, dermatofibroma (a firm, harmless skin nodule) and other rare lesions. Because it is a mix of very different lesions, and there are few training examples, this is the group where the system is least specific."
+    },
+    {
+      "id": "class_misc_features", "type": "class", "tags": ["class:Misc", "feature"],
+      "title": "Other lesion types: how they look",
+      "text": "Appearance depends on the lesion. Vascular lesions often look red, purple or blue and show red-purple lakes under a dermatoscope. Dermatofibromas are firm and often show a central white scar-like patch with a delicate network around it. Lentigines are flat, evenly brown spots. A dermatologist may still want to look at a lesion that the system places in this group."
+    },
+    {
+      "id": "attr_pn", "type": "attribute", "tags": ["attr:PN", "checklist"],
+      "title": "Pigment network",
+      "text": "The pigment network is a grid of brown lines, like a honeycomb, that a dermatoscope can show inside a lesion. In harmless moles the network is usually regular: evenly spaced lines that fade out gently towards the edge (called typical). A network with thick, dark, uneven or broken lines (called atypical) is a warning sign and counts as a major criterion, worth 2 points, in the 7-point checklist. In this system a 'positive' pigment network means an atypical one."
+    },
+    {
+      "id": "attr_bwv", "type": "attribute", "tags": ["attr:BWV", "checklist"],
+      "title": "Blue-whitish veil",
+      "text": "A blue-whitish veil is an irregular, structureless patch of blue colour with a milky, ground-glass white haze over it. It is most often linked to melanoma and is a major criterion, worth 2 points, in the 7-point checklist. In this system 'positive' means a blue-whitish veil was found."
+    },
+    {
+      "id": "attr_vs", "type": "attribute", "tags": ["attr:VS", "checklist"],
+      "title": "Vascular structures",
+      "text": "Vascular structures are the small blood vessels visible in a lesion, and their shape matters. Tree-like branching (arborizing) vessels point towards basal cell carcinoma, comma-shaped vessels are common in dermal moles, hairpin vessels are often seen in seborrheic keratosis, and irregular linear or dotted vessels count as an atypical vascular pattern, a major criterion worth 2 points in the 7-point checklist. In this system 'positive' means that some vascular structure was found, so the exact pattern still has to be judged by an expert."
+    },
+    {
+      "id": "attr_pig", "type": "attribute", "tags": ["attr:PIG", "checklist"],
+      "title": "Irregular pigmentation",
+      "text": "Irregular pigmentation means uneven patches or blotches of black, brown or grey colour that are unevenly shaped or spread through the lesion. It is a minor criterion, worth 1 point, in the 7-point checklist. In this system 'positive' means diffuse or localised irregular pigmentation was found."
+    },
+    {
+      "id": "attr_str", "type": "attribute", "tags": ["attr:STR", "checklist"],
+      "title": "Streaks",
+      "text": "Streaks are finger-like or radial lines that extend from the edge of a lesion. Regular, symmetric streaks can be seen in some harmless moles (for example Spitz moles), whereas irregular streaks are a minor criterion, worth 1 point, in the 7-point checklist. In this system 'positive' means irregular streaks."
+    },
+    {
+      "id": "attr_dag", "type": "attribute", "tags": ["attr:DaG", "checklist"],
+      "title": "Dots and globules",
+      "text": "Dots and globules are small round dark spots (dots) and slightly larger round structures (globules) inside a lesion. When they are similar in size and evenly spread, they are common in harmless moles. When they vary in size, shape and position (irregular), they are a minor criterion, worth 1 point, in the 7-point checklist. In this system 'positive' means irregular dots and globules."
+    },
+    {
+      "id": "attr_rs", "type": "attribute", "tags": ["attr:RS", "checklist"],
+      "title": "Regression structures",
+      "text": "Regression structures are white, scar-like areas and/or blue-grey 'peppered' spots that appear where part of a lesion may have faded. They are a minor criterion, worth 1 point, in the 7-point checklist, although they can also be seen in some harmless lesions. In this system 'positive' means any regression structure was found."
+    },
+    {
+      "id": "checklist_score", "type": "method", "tags": ["checklist"],
+      "title": "The 7-point checklist",
+      "text": "The 7-point checklist is a method dermatologists use to score what they see with a dermatoscope. Three major features score 2 points each (atypical pigment network, blue-whitish veil, atypical vascular pattern) and four minor features score 1 point each (irregular streaks, irregular pigmentation, irregular dots and globules, regression structures). A total of 3 points or more suggests that the lesion should be examined more closely for possible melanoma. In this project the seven features are estimated by the AI from the images; they are not typed in by the user, and the checklist is a guide, not a diagnosis."
+    },
+    {
+      "id": "meta_location", "type": "metadata", "tags": ["meta:location"],
+      "title": "Why body site is asked",
+      "text": "Where a lesion is on the body gives useful context but never decides a diagnosis by itself. Melanomas are commonly found on the back in men and on the legs in women. Basal cell carcinomas are more common on skin that has had long sun exposure, such as the head and neck. Lesions on the palms, soles and nails, and in the genital area, are looked at with extra care because their appearance differs from the rest of the skin."
+    },
+    {
+      "id": "meta_elevation", "type": "metadata", "tags": ["meta:elevation"],
+      "title": "Why the feel of the lesion is asked",
+      "text": "Elevation describes whether a lesion is flat, slightly raised (palpable) or a raised bump (nodular). Flat lesions include many early melanomas, flat moles and lentigines. Raised, firm lesions include many basal cell carcinomas and dermal moles, and also thicker or nodular melanomas. A lesion that becomes raised or thicker over time is worth having checked."
+    },
+    {
+      "id": "meta_sex", "type": "metadata", "tags": ["meta:sex"],
+      "title": "Why sex is asked",
+      "text": "Sex has only a weak influence on which type of lesion is more likely. The system uses it as one small clue among many, together with the images."
+    },
+    {
+      "id": "meta_missing", "type": "metadata", "tags": ["meta:missing"],
+      "title": "Information that was not provided",
+      "text": "The system was trained with a few extra clinician-recorded details (a checklist score, diagnostic difficulty and planned management). Ordinary users cannot know these, so they are left blank. Blank details simply contribute nothing; the analysis then relies mostly on the two images and the basic answers that were given. This can make the result somewhat less precise than if the full clinical record were available."
+    },
+    {
+      "id": "model_probability", "type": "model", "tags": ["model", "probability"],
+      "title": "How to read the percentages",
+      "text": "The percentages are the system's own scores for the five lesion groups and they add up to 100 percent. They are not the chance that the lesion 'is' a particular disease, and they have not been calibrated against real-world outcomes. A high score means the images resemble training examples of that group. A low score does not rule a group out, and two groups with similar scores mean the system is unsure."
+    },
+    {
+      "id": "model_pipeline", "type": "model", "tags": ["model"],
+      "title": "How the system reaches its result",
+      "text": "First, a multimodal transformer network (RemixFormer++) studies the clinical photograph, the dermoscopy image and the basic patient information. Second, a knowledge graph of seven dermoscopic features and five lesion groups links what was seen to what is typical for each group. Third, a small rule-based step adjusts the scores using knowledge learned from the training data, boosting groups whose typical features are present and lowering groups whose features contradict what was seen. The result is a set of five scores, plus estimates for the seven features."
+    },
+    {
+      "id": "model_graph", "type": "model", "tags": ["model", "graph"],
+      "title": "The knowledge graph and its edge weights",
+      "text": "The graph has one node for each of the seven dermoscopic features and each of the five lesion groups. The number on a link (its weight) comes from how often the two things occurred together in the training data, for example how often melanomas showed irregular dots and globules. A higher weight means a stronger association. The system uses these links so that its feature estimates and its lesion-group scores agree with each other."
+    },
+    {
+      "id": "model_heuristic", "type": "model", "tags": ["model", "heuristic"],
+      "title": "The rule-based adjustment (heuristic)",
+      "text": "After the neural network produces its scores, a fixed rule adjusts them slightly. Features that are typical for a group raise that group's score, features that rarely occur with it lower the score, and pairs of features that often appear together add a small bonus. Each feature is weighted by how reliable the system has been at detecting it. The adjustment is deliberately gentle, so it refines the neural network's answer rather than replacing it."
+    },
+    {
+      "id": "model_limits", "type": "model", "tags": ["model", "limitations", "safety"],
+      "title": "Limits of this system",
+      "text": "The system was trained on the Derm7pt research dataset, about one thousand cases with a clinical photo and a dermoscopy image each. Some groups, such as basal cell carcinoma, seborrheic keratosis and the 'other' group, have few examples, so their scores are less reliable. Public dermatology datasets contain mostly lighter skin tones and images taken in clinics, so results may be less accurate for other skin tones, other cameras, or photos taken at home. The system has not been tested in a clinical trial and is not a medical device."
+    },
+    {
+      "id": "input_quality", "type": "model", "tags": ["input", "limitations"],
+      "title": "Getting a good image",
+      "text": "Use sharp images in even light, with the lesion centred and filling much of the frame. Avoid filters, heavy shadows, rulers or hair covering the lesion. The dermoscopy image must be a close-up taken through a dermatoscope (a special magnifier with light); an ordinary phone photo is not a dermoscopy image, and the system will not be reliable if one is used in its place."
+    },
+    {
+      "id": "safety_see_doctor", "type": "safety", "tags": ["safety", "next_steps"],
+      "title": "When to see a doctor",
+      "text": "See a doctor promptly if a spot is new and growing, changes in size, shape or colour, bleeds, itches, hurts, crusts, or does not heal within about four weeks, or if it looks different from your other moles (the 'ugly duckling' sign). This applies whatever a computer program says: a low score from a research tool is never a reason to ignore a lesion that worries you."
+    },
+    {
+      "id": "safety_next_steps", "type": "safety", "tags": ["safety", "next_steps"],
+      "title": "What usually happens at the doctor",
+      "text": "A dermatologist looks at the lesion with a dermatoscope and may compare it with your other moles. Depending on what they see they may advise monitoring (sometimes with photographs over time), or take a small sample (biopsy) to be looked at under a microscope, or remove the lesion. Bringing this report, or the images you used, can help start the conversation."
+    },
+    {
+      "id": "safety_disclaimer", "type": "safety", "tags": ["safety", "disclaimer"],
+      "title": "This is not a diagnosis",
+      "text": "This is a research prototype. It gives an experimental estimate from images and a few answers, and it cannot diagnose a skin condition. Only a qualified clinician can diagnose a skin lesion, usually by examining it with dermoscopy and, when necessary, a biopsy. Do not use this result to decide whether a lesion is safe, and do not delay seeing a doctor because of it."
+    },
+    {
+      "id": "general_abcde", "type": "safety", "tags": ["safety", "abcde", "class:Mel"],
+      "title": "The ABCDE self-check",
+      "text": "Asymmetry: one half looks different from the other. Border: edges are ragged, notched or blurred. Colour: several shades of brown, black, red, white or blue. Diameter: larger than about 6 millimetres, although melanomas can be smaller. Evolving: any change in size, shape, colour, height or symptoms. Any of these is a reason to have a spot looked at."
+    },
+    {
+      "id": "general_sun", "type": "safety", "tags": ["safety", "prevention"],
+      "title": "Sun safety and skin checks",
+      "text": "Protecting skin from the sun lowers the risk of most skin cancers. Seek shade at midday, cover up, use a broad-spectrum sunscreen of SPF 30 or higher, and avoid tanning beds. Check your own skin regularly, including hard-to-see places, and have any new or changing spot checked."
+    },
+    {
+      "id": "gloss_dermoscopy", "type": "glossary", "term": "Dermoscopy", "tags": ["glossary"],
+      "title": "Dermoscopy",
+      "text": "Dermoscopy is a way of looking at the skin with a lit magnifier called a dermatoscope. It shows colours and patterns beneath the skin surface that cannot be seen with the naked eye."
+    },
+    {
+      "id": "gloss_biopsy", "type": "glossary", "term": "Biopsy", "tags": ["glossary"],
+      "title": "Biopsy",
+      "text": "A biopsy is the removal of a small piece of skin, or of the whole lesion, so that it can be examined under a microscope. It is the way a skin lesion is diagnosed for certain."
+    },
+    {
+      "id": "gloss_benign_malignant", "type": "glossary", "term": "Benign / malignant", "tags": ["glossary"],
+      "title": "Benign and malignant",
+      "text": "Benign means not cancer: it does not spread. Malignant means cancer: it can grow into nearby tissue and sometimes spread elsewhere."
+    },
+    {
+      "id": "gloss_lesion", "type": "glossary", "term": "Lesion", "tags": ["glossary"],
+      "title": "Lesion",
+      "text": "A lesion is any spot, bump or patch of skin that looks different from the skin around it."
+    },
+    {
+      "id": "gloss_melanocyte", "type": "glossary", "term": "Melanocyte", "tags": ["glossary"],
+      "title": "Melanocyte",
+      "text": "Melanocytes are the skin cells that make the brown pigment (melanin) that gives skin its colour. Moles and melanomas both come from these cells."
+    },
+    {
+      "id": "gloss_attention", "type": "glossary", "term": "Attention map", "tags": ["glossary"],
+      "title": "Attention map",
+      "text": "An attention map shows which parts of an image the neural network gave more weight to while working. It is a hint about what the network used, not a proof that those areas are abnormal."
+    },
+    {
+      "id": "gloss_heuristic", "type": "glossary", "term": "Heuristic", "tags": ["glossary"],
+      "title": "Heuristic",
+      "text": "A heuristic is a practical rule of thumb. Here it is a small, fixed scoring rule that nudges the neural network's scores using clinical knowledge learned from the training data."
+    }
+  ]
+}
